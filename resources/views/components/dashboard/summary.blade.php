@@ -168,7 +168,7 @@
     getList();
     async function getList() {
         //showLoader();
-        let res=await axios.get("/summary");
+        let res=await axios.get("/Summery");
 
         document.getElementById('product').innerText=res.data['product']
         document.getElementById('category').innerText=res.data['category']

@@ -105,8 +105,8 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-12 p-1">
-                                    <label class="form-label">Product ID *</label>
-                                    <input type="text" class="form-control" id="PId">
+                                    <label class="form-label d-none">Product ID *</label>
+                                    <input type="text" class="form-control  d-none" id="PId">
                                     <label class="form-label mt-2">Product Name *</label>
                                     <input type="text" class="form-control" id="PName">
                                     <label class="form-label mt-2">Product Price *</label>
@@ -245,13 +245,13 @@
 
 
         async function CustomerList(){
-            let res=await axios.get("/list-customer");
+            let res=await axios.get("/CustomerList");
             let customerList=$("#customerList");
             let customerTable=$("#customerTable");
             customerTable.DataTable().destroy();
             customerList.empty();
 
-            res.data.forEach(function (item,index) {
+            res.data['rows'].forEach(function (item,index) {
                 let row=`<tr class="text-xs">
                         <td><i class="bi bi-person"></i> ${item['name']}</td>
                         <td><a data-name="${item['name']}" data-email="${item['email']}" data-id="${item['id']}" class="btn btn-outline-dark addCustomer  text-xxs px-2 py-1  btn-sm m-0">Add</a></td>
@@ -282,7 +282,7 @@
 
 
         async function ProductList(){
-            let res=await axios.get("/list-product");
+            let res=await axios.get("/ProductList");
             let productList=$("#productList");
             let productTable=$("#productTable");
             productTable.DataTable().destroy();
@@ -342,10 +342,10 @@
             else{
 
                 showLoader();
-                let res=await axios.post("/invoice-create",Data)
+                let res=await axios.post("/InvoiceCreate",Data)
                 hideLoader();
-                if(res.data===1){
-                    window.location.href='/invoicePage'
+                if(res.status===200){
+                    window.location.href='/InvoicePage'
                     successToast("Invoice Created");
                 }
                 else{

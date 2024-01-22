@@ -21,9 +21,9 @@
             let id=document.getElementById('deleteID').value;
             document.getElementById('delete-modal-close').click();
             showLoader();
-            let res=await axios.post("/invoice-delete",{inv_id:id})
+            let res=await axios.post("/InvoiceDelete",{inv_id:id})
             hideLoader();
-            if(res.data===1){
+            if(res.status===200 ){
                 successToast("Request completed")
                 await getList();
             }

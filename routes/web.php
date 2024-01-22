@@ -89,6 +89,8 @@ Route::group(['middleware' => ['jtwTokenVarify']], function () {
     Route::get('/InvoiceSelect', [InvoiceController::class, 'InvoiceSelect']);
     Route::post('/InvoiceDetails', [InvoiceController::class, 'InvoiceDetails']);
     Route::post('/InvoiceDelete', [InvoiceController::class, 'InvoiceDelete']);
+    Route::get('/Summery', [InvoiceController::class, 'Summery']);
+
     
   
     

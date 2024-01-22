@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Models\Invoice;
+use App\Models\Product;
+use App\Models\Category;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Models\InvoiceProduct;
@@ -62,13 +64,13 @@ class InvoiceController extends Controller
             $user_id = $request->header('id');
             $customerDetails = Customer::where('user_id', $user_id)->where('id',$request->cus_id)->first(); 
             $invoiceTotal = Invoice::where('user_id',"=", $user_id)->where('id',"=", $request->inv_id)->first();
-            $invoiceProducts = InvoiceProduct::where('user_id',"=",$user_id)
-            ->where('invoice_id', $request->inv_id)
+            $invoiceProduct=InvoiceProduct::where('invoice_id',$request->input('inv_id'))
+            ->where('user_id',$user_id)->with('product')
             ->get();
             return array(
-                'customerDetails' => $customerDetails, 
-                'invoiceTotal' => $invoiceTotal,
-                'invoiceProducts' => $invoiceProducts
+                'customer' => $customerDetails, 
+                'invoice' => $invoiceTotal,
+                'product' => $invoiceProduct
             );
         }catch(Exception $exception){
             
@@ -90,6 +92,31 @@ class InvoiceController extends Controller
         catch (Exception $e){
             DB::rollBack();
             return 0;
+        }
+    }
+
+    function Summery(Request $request){
+        try{
+            $user_id = $request->header('id');
+            $productCount = Product::where('user_id', $user_id)->count();
+            $categoryCount = Category::where('user_id', $user_id)->count();
+            $CustomerCount = Customer::where('user_id', $user_id)->count();
+            $InvoiceCount = Invoice::where('user_id', $user_id)->count();
+            $Total = Invoice::where('user_id', $user_id)->sum('total');
+            $TotalVat = Invoice::where('user_id', $user_id)->sum('vat');
+            $payable = Invoice::where('user_id', $user_id)->sum('payable');
+            return array(
+                'product' => $productCount, 
+                'category' => $categoryCount,
+                'customer' => $CustomerCount,
+                'invoice' => $InvoiceCount,
+                'total' => $Total,
+                'vat' => $TotalVat,
+                'payable' => $payable
+                
+            );
+        }catch(Exception $e){
+            return response()->json($e->getMessage());
         }
     }
 }
