@@ -12,7 +12,8 @@
                             <p class="text-xs mx-0 my-1">User ID:  <span id="CId"></span> </p>
                         </div>
                         <div class="col-4">
-                            <img class="w-50" src="{{"images/logo.png"}}">
+                            {{-- <img class="w-50" src="{{"images/logo.png"}}"> --}}
+                            <img class="w-50" src="https://ecdn.dhakatribune.net/contents/cache/images/640x359x1/uploads/dten/2022/12/27/shwapno-1.jpeg">
                             <p class="text-bold mx-0 my-1 text-dark">Invoice  </p>
                             <p class="text-xs mx-0 my-1">Date: {{ date('Y-m-d') }} </p>
                         </div>

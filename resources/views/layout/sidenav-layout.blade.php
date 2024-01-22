@@ -41,11 +41,13 @@
 <nav class="navbar fixed-top px-0 shadow-sm bg-white">
     <div class="container-fluid">
 
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="{{ url('dashboard') }}">
             <span class="icon-nav m-0 h5" onclick="MenuBarClickHandler()">
                 <img class="nav-logo-sm mx-2"  src="{{asset('images/menu.svg')}}" alt="logo"/>
             </span>
-            <img class="nav-logo  mx-2"  src="{{asset('images/logo.png')}}" alt="logo"/>
+            {{-- <img class="nav-logo  mx-2"  src="{{asset('images/logo.png')}}" alt="logo"/> --}}
+            <img class="nav-logo" src="https://ecdn.dhakatribune.net/contents/cache/images/640x359x1/uploads/dten/2022/12/27/shwapno-1.jpeg">
+
         </a>
 
         <div class="float-right h-auto d-flex">
