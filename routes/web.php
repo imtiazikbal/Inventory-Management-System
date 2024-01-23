@@ -3,6 +3,7 @@
 use App\Models\InvoiceProduct;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
@@ -19,7 +20,7 @@ use App\Http\Middleware\JWTtokenVarificationMiddleware;
 | be assigned to the "web" middleware group. Make something great!
 |
  */
-
+Route::view('/', 'pages.auth.login-page');
 //Backend Api
 Route::post('/userRegistration', [UserController::class, 'userRegistration']);
 Route::post('/userLogin', [UserController::class, 'userLogin']);
@@ -90,8 +91,10 @@ Route::group(['middleware' => ['jtwTokenVarify']], function () {
     Route::post('/InvoiceDetails', [InvoiceController::class, 'InvoiceDetails']);
     Route::post('/InvoiceDelete', [InvoiceController::class, 'InvoiceDelete']);
     Route::get('/Summery', [InvoiceController::class, 'Summery']);
+});
 
+Route::group(['middleware' => ['jtwTokenVarify']], function () {
     
-  
-    
+    Route::view('/ReportPage', "pages.dashboard.report-page");
+   Route::get('/sales-report/{FormDate}/{ToDate}',[ReportController::class,'report']);
 });

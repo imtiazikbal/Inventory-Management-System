@@ -31,6 +31,7 @@
                                     <thead class="w-100">
                                     <tr class="text-xs text-bold">
                                         <td>Name</td>
+                                        <td>Price</td>
                                         <td>Qty</td>
                                         <td>Total</td>
                                     </tr>
@@ -87,6 +88,7 @@
         res.data['product'].forEach(function (item,index) {
             let row=`<tr class="text-xs">
                         <td>${item['product']['name']}</td>
+                        <td>${item['product']['price']}</td>
                         <td>${item['qty']}</td>
                         <td>${item['sale_price']}</td>
                      </tr>`

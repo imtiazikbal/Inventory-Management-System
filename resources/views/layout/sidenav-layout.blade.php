@@ -41,7 +41,7 @@
 <nav class="navbar fixed-top px-0 shadow-sm bg-white">
     <div class="container-fluid">
 
-        <a class="navbar-brand" href="{{ url('dashboard') }}">
+        <a class="navbar-brand" href="#">
             <span class="icon-nav m-0 h5" onclick="MenuBarClickHandler()">
                 <img class="nav-logo-sm mx-2"  src="{{asset('images/menu.svg')}}" alt="logo"/>
             </span>
@@ -104,7 +104,7 @@
         <span class="side-bar-item-caption">Invoice</span>
     </a>
 
-    <a href="{{url('/reportPage')}}" class="side-bar-item">
+    <a href="{{url('/ReportPage')}}" class="side-bar-item">
         <i class="bi bi-file-earmark-bar-graph"></i>
         <span class="side-bar-item-caption">Report</span>
     </a>
@@ -116,6 +116,7 @@
 <div id="contentRef" class="content">
     @yield('content')
 </div>
+
 
 
 
